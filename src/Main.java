@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         //Listen von Stationen, Linien und Dateien deklarieren
         List<Bahnhof> bahnhofs = new ArrayList<>();
-        List<String> lines = new ArrayList<>();
+        List<String> UBahnLinien = new ArrayList<>();
         List<File> files;
 
         //Stationen anhand von Textdateien im Verzeichnis Lines erstellen
@@ -15,7 +15,7 @@ public class Main {
         for (File file : files) {
             try {
                 String name = file.getName().replace(".txt", "");
-                lines.add(name);
+                UBahnLinien.add(name);
                 Scanner stationScanner = new Scanner(file);
                 while (stationScanner.hasNextLine()) {
 
@@ -29,7 +29,7 @@ public class Main {
 
         //Hinzufügen der Nachbarn der einzelnen Bahnhöfe
         for (int i = 0; i < bahnhofs.size(); i++) {
-            for (String line : lines) {
+            for (String line : UBahnLinien) {
                 if (bahnhofs.get(i).UBahnLinieHolen().equals(line)) {
                     if (i == 0) {
                         bahnhofs.get(i).NachbarHinzufügen(bahnhofs.get(i + 1));
@@ -65,9 +65,9 @@ public class Main {
         UBahnKarte UBahnKarte = new UBahnKarte();
 
 
-       //Hinzufügen von Bahnhöfen zur Metrokarte
+       //Hinzufügen von Bahnhöfen zur Bahnhofkarte
         for (Bahnhof bahnhof : bahnhofs) {
-            UBahnKarte.StationHinzufügen(bahnhof);
+            UBahnKarte.BahnhofHinzufügen(bahnhof);
         }
 
 
@@ -106,11 +106,16 @@ public class Main {
                     }
 
                     //Suche nach der kürzesten Route
-                    List<Bahnhof> shortestPath = UBahnKarte.denkürzestenWegfinden(BahnhofEin, BahnhofZwei);
+                    List<Bahnhof> kürzesterWeg = UBahnKarte.denkürzestenWegfinden(BahnhofEin, BahnhofZwei);
 
                     //Schlussfolgerung
-                    for (Bahnhof bahnhof : shortestPath) {
-                        System.out.println(bahnhof.NameHolen() + "(" + bahnhof.UBahnLinieHolen() + ")");
+                    for (int i = 0; i < kürzesterWeg.size(); i++) {
+                        System.out.println(kürzesterWeg.get(i).NameHolen() + "(" + kürzesterWeg.get(i).UBahnLinieHolen() + ")");
+                        if (i + 1 < kürzesterWeg.size()) {
+                            if (!kürzesterWeg.get(i).UBahnLinieHolen().equals(kürzesterWeg.get(i + 1).UBahnLinieHolen())) {
+                                System.out.println("Wechsel zur " + kürzesterWeg.get(i + 1).UBahnLinieHolen());
+                            }
+                        }
                     }
                     break;
                 case "3":

@@ -9,7 +9,7 @@ public class UBahnKarte {
     }
 
     //Getters und setters
-    public void StationHinzufügen(Bahnhof bahnhof) {
+    public void BahnhofHinzufügen(Bahnhof bahnhof) {
         bahnhofs.add(bahnhof);
     }
 
@@ -43,7 +43,7 @@ public class UBahnKarte {
             }
         }
 
-        // Pfad von der Endstation zur Startstation bauen
+        // Weg von der Endbahnhof zur Startbahnhof bauen
         List<Bahnhof> kürzesterWeg = new ArrayList<>();
         Bahnhof aktuelleBahnhof = Endbahnhof;
         while (frühereBahnhöfe.containsKey(aktuelleBahnhof)) {

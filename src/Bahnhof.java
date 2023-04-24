@@ -18,12 +18,12 @@ public class Bahnhof {
     public String NameHolen() {
         return name;
     }
-
-    public String UBahnLinieHolen(){return UBahnLinie;}
+    public String UBahnLinieHolen() {
+        return UBahnLinie;
+    }
     public void NachbarHinzufügen(Bahnhof neighbor) {
         Nachbarn.add(neighbor);
     }
-
     public List<Bahnhof> NachbarHolen() {
         return Nachbarn;
     }
